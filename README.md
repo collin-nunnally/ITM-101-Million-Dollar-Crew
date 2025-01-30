@@ -1,2 +1,2 @@
-# ITM-101--1-000-000-Crew
+# ITM-101-Million-Dollar-Crew
 This is for creating bad Million Dollar Ideas! 💸
