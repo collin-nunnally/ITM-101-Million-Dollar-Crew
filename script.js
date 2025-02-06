@@ -1,3 +1,20 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 // Function to calculate factorial
 function factorial(n) {
     if (n === 0 || n === 1) return 1;
@@ -8,10 +25,10 @@ function factorial(n) {
     return result;
 }
 
-// Function to generate a ridiculously hard CAPTCHA
+// Function to generate a CAPTCHA
 function generateCaptcha() {
-    let num1 = Math.floor(Math.random() * 10) + 1; // 1-10
-    let num2 = Math.floor(Math.random() * 20) + 1; // 1-20
+    let num1 = Math.floor(Math.random() * 10) + 1;
+    let num2 = Math.floor(Math.random() * 20) + 1;
     let operations = ["+", "-", "*", "**", "!", "%", "sqrt", "log"];
     let operation = operations[Math.floor(Math.random() * operations.length)];
 
@@ -30,24 +47,24 @@ function generateCaptcha() {
             answer = num1 * num2;
             break;
         case "**":
-            question = `${num1}^${Math.min(num2, 4)} = ?`; // Power up to 4
+            question = `${num1}^${Math.min(num2, 4)} = ?`;
             answer = Math.pow(num1, Math.min(num2, 4));
             break;
         case "!":
-            question = `${num1 + 3}! = ?`; // Factorial up to 7!
+            question = `${num1 + 3}! = ?`;
             answer = factorial(num1 + 3);
             break;
         case "%":
-            question = `${num1 * 10} % ${num2} = ?`; // Modulo
+            question = `${num1 * 10} % ${num2} = ?`;
             answer = (num1 * 10) % num2;
             break;
         case "sqrt":
-            let sqrtNum = (num1 + 2) ** 2; // Square of a number (perfect squares)
+            let sqrtNum = (num1 + 2) ** 2;
             question = `√${sqrtNum} = ?`;
             answer = Math.sqrt(sqrtNum);
             break;
         case "log":
-            let logNum = Math.pow(10, num1); // Logarithm base 10
+            let logNum = Math.pow(10, num1);
             question = `log10(${logNum}) = ?`;
             answer = Math.log10(logNum);
             break;
@@ -57,9 +74,10 @@ function generateCaptcha() {
     return answer;
 }
 
-let correctCaptchaAnswer = generateCaptcha(); // Generate CAPTCHA on page load
+let correctCaptchaAnswer = generateCaptcha();
 
-document.getElementById("calculate").addEventListener("click", function () {
+// Calculate Age
+document.getElementById("calculate").addEventListener("click", function() {
     const name = document.getElementById("name").value.trim();
     const birthday = document.getElementById("birthday").value;
     const result = document.getElementById("result");
@@ -67,11 +85,10 @@ document.getElementById("calculate").addEventListener("click", function () {
     const banner = document.getElementById("banner");
     const captchaInput = parseInt(document.getElementById("captchaAnswer").value);
 
-    // CAPTCHA verification
     if (captchaInput !== correctCaptchaAnswer) {
-        alert("INCORRECT CAPTCHA! Good luck next time. 😈");
-        correctCaptchaAnswer = generateCaptcha(); // Generate a new question
-        document.getElementById("captchaAnswer").value = ""; // Clear input
+        alert("INCORRECT CAPTCHA!");
+        correctCaptchaAnswer = generateCaptcha();
+        document.getElementById("captchaAnswer").value = "";
         return;
     }
 
@@ -80,53 +97,59 @@ document.getElementById("calculate").addEventListener("click", function () {
         return;
     }
 
-    // Calculate age
     const birthDate = new Date(birthday);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
-
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    if (today.getMonth() < birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
         age--;
     }
 
     result.textContent = name ? `${name}, you are ${age} years old.` : `You are ${age} years old.`;
+    insult.textContent = insultsList.length ? insultsList[Math.floor(Math.random() * insultsList.length)] : "No insults available.";
 
-    if (monthDiff === 0 && dayDiff === 0) {
-        banner.textContent = "🎉 Happy Birthday! 🎂";
-        banner.style.color = "red";
-        banner.style.fontSize = "20px";
-        banner.style.fontWeight = "bold";
-    } else {
-        banner.textContent = "";
-    }
-
-    insult.textContent = getDailyInsult(birthDate);
-    correctCaptchaAnswer = generateCaptcha(); // Refresh CAPTCHA after successful attempt
+    correctCaptchaAnswer = generateCaptcha();
 });
 
-// Function to generate an insult based on the birthday
-function getDailyInsult(date) {
-    const insults = [
-        "You're so slow, snails send you motivational speeches.",
-        "Your jokes are so bad, even crickets refuse to chirp.",
-        "You have the charisma of a soggy piece of bread.",
-        "You're about as useful as a screen door on a submarine.",
-        "You're so awkward, even mannequins feel uncomfortable around you.",
-        "If you were any slower, time would go backward just to watch you fail.",
-        "Your brain operates on dial-up, and the connection is weak.",
-        "Your mother smelled of elderberries and your father was a hamster.",
-        "You're so dense, light bends around you.",
-        "You're so clumsy, you trip over a wireless connection.",
-        "You're so forgetful, you probably forgot to read this insult."
+// Submit Insult
+document.getElementById("submitInsult").addEventListener("click", async function() {
+    const newInsult = document.getElementById("newInsult").value.trim();
+    const message = document.getElementById("submissionMessage");
 
-    ];
+    if (!newInsult) {
+        message.textContent = "Please enter an insult before submitting.";
+        message.style.color = "red";
+        return;
+    }
 
-    const startOfYear = new Date(date.getFullYear(), 0, 0);
-    const diff = date - startOfYear;
-    const oneDay = 1000 * 60 * 60 * 24;
-    let dayOfYear = Math.floor(diff / oneDay);
+    try {
+        await addDoc(collection(db, "insults"), { text: newInsult, timestamp: new Date() });
+        message.textContent = "Insult submitted successfully!";
+        message.style.color = "green";
+        document.getElementById("newInsult").value = "";
+        loadInsults();
+    } catch (error) {
+        message.textContent = "Error submitting insult.";
+        message.style.color = "red";
+        console.error("Error adding document: ", error);
+    }
+});
 
-    return insults[dayOfYear % insults.length];
+// Load insults from Firestore
+async function loadInsults() {
+    const querySnapshot = await getDocs(collection(db, "insults"));
+    insultsList.length = 0;
+    const insultListElement = document.getElementById("insultsList");
+    insultListElement.innerHTML = "";
+
+    querySnapshot.forEach(doc => {
+        const insultText = doc.data().text;
+        insultsList.push(insultText);
+        const li = document.createElement("li");
+        li.textContent = insultText;
+        insultListElement.appendChild(li);
+    });
 }
+
+const insultsList = [];
+loadInsults();

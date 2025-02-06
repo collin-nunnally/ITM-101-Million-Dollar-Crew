@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Age Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../test_files/style.css">
 </head>
+
 <body>
     <div>
         <h2>
@@ -17,7 +19,7 @@
         <label for="birthday">Enter your birthday:</label>
         <input type="date" id="birthday" name="birthday">
 
-        <!-- RIDICULOUSLY HARD CAPTCHA -->
+        <!-- CAPTCHA -->
         <div class="captcha-container">
             <label for="captcha">Solve this: <span id="captchaQuestion"></span></label>
             <input type="number" id="captchaAnswer" title="Enter the answer" placeholder="Answer">
@@ -27,7 +29,19 @@
         <p id="result"></p>
         <p id="insult"></p>
         <div id="banner"></div>
+
+        <!-- Insult Submission -->
+        <h2>Submit Your Own Insult</h2>
+        <input type="text" id="newInsult" placeholder="Enter your insult here">
+        <button id="submitInsult">Submit Insult</button>
+        <p id="submissionMessage"></p>
+
+        <h2>Latest Insults</h2>
+        <ul id="insultsList"></ul>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Firebase & Script -->
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
