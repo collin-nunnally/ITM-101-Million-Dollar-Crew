@@ -98,29 +98,4 @@ document.getElementById("calculate").addEventListener("click", function () {
         banner.style.color = "red";
         banner.style.fontSize = "20px";
         banner.style.fontWeight = "bold";
-    } else {
-        banner.textContent = "";
-    }
-
-    insult.textContent = getDailyInsult(birthDate);
-    correctCaptchaAnswer = generateCaptcha(); // Refresh CAPTCHA after successful attempt
-});
-
-// Function to generate an insult based on the birthday
-function getDailyInsult(date) {
-    const insults = [
-        "You're so slow, snails send you motivational speeches.",
-        "Your jokes are so bad, even crickets refuse to chirp.",
-        "You have the charisma of a soggy piece of bread.",
-        "You're about as useful as a screen door on a submarine.",
-        "You're so awkward, even mannequins feel uncomfortable around you.",
-        "If you were any slower, time would go backward just to watch you fail.",
-        "Your brain operates on dial-up, and the connection is weak."
-    ];
-
-    const startOfYear = new Date(date.getFullYear(), 0, 0);
-    const diff = date - startOfYear;
-    const oneDay = 1000 * 60 * 60 * 24;
-    let dayOfYear = Math.floor(diff / oneDay);
-
-    return insults[dayOfYear % insults.length];
+... (33 lines left)
