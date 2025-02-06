@@ -14,7 +14,7 @@
             What is your name? <input type="text" id="name" name="name" title="Enter your name" placeholder="Your name">
         </h2>
     </div>
-    <div class="container">
+    <div class="container" style="display: flex; flex-direction: column;">
         <h1>Age Calculator</h1>
         <label for="birthday">Enter your birthday:</label>
         <input type="date" id="birthday" name="birthday">
@@ -25,7 +25,7 @@
             <input type="number" id="captchaAnswer" title="Enter the answer" placeholder="Answer">
         </div>
 
-        <button id="calculate" type="button">Calculate Age</button>
+        <button id="calculate" type="button" style="margin-top: 20px;">Calculate Age</button>
         <p id="result"></p>
         <p id="insult"></p>
         <div id="banner"></div>
