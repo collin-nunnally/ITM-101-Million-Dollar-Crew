@@ -9,14 +9,18 @@ body {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Optional: Set a max width for larger screens */
 }
 
 input, button {
     margin-top: 10px;
     padding: 8px;
     font-size: 16px;
+    width: 100%; /* Make inputs and buttons full width */
 }
 
 button {
@@ -45,4 +49,6 @@ button:hover {
     margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
 }
