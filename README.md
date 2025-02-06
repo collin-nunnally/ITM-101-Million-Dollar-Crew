@@ -6,6 +6,6 @@ This is for creating bad Million Dollar Ideas! 💸
 - Adam Herrmann - UX Design
 - Austin Conner - Cloud Dude
 - Everon (Jaden) Staker - Task Manager
-
+- Collin Nunnally - Junior Developer
 
 
