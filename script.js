@@ -3,13 +3,13 @@ import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.c
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD9txyqjOcBIVkodnF_lKVYigtXXwGgvmk",
-  authDomain: "million-dollar-crew.firebaseapp.com",
-  projectId: "million-dollar-crew",
-  storageBucket: "million-dollar-crew.firebasestorage.app",
-  messagingSenderId: "719263246304",
-  appId: "1:719263246304:web:e2bf79dc335b9295c4ad85",
-  measurementId: "G-D7CB8TZ9C9"
+    apiKey: "AIzaSyD9txyqjOcBIVkodnF_lKVYigtXXwGgvmk",
+    authDomain: "million-dollar-crew.firebaseapp.com",
+    projectId: "million-dollar-crew",
+    storageBucket: "million-dollar-crew.firebasestorage.app",
+    messagingSenderId: "719263246304",
+    appId: "1:719263246304:web:e2bf79dc335b9295c4ad85",
+    measurementId: "G-D7CB8TZ9C9"
 };
 
 // Initialize Firebase
@@ -130,7 +130,7 @@ document.getElementById("submitInsult").addEventListener("click", async function
         document.getElementById("newInsult").value = "";
         loadInsults();
     } catch (error) {
-        message.textContent = "Error submitting insult.";
+        message.textContent = "Error submitting insult." + error;
         message.style.color = "red";
         console.error("Error adding document: ", error);
     }
