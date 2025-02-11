@@ -1,0 +1,1 @@
+// Look in Discord for actual firebase Config.js
