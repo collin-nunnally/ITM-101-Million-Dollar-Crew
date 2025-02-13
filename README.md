@@ -7,5 +7,6 @@ This is for creating bad Million Dollar Ideas! 💸
 - Austin Conner - Cloud Dude
 - Everon (Jaden) Staker - Task Manager
 - Collin Nunnally - Junior Developer
+- Brayden Dawson - Quality Control
 
 
