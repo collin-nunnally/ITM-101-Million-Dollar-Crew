@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+<<<<<<< HEAD
 // Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyD9txyqjOcBIVkodnF_lKVYigtXXwGgvmk",
@@ -12,6 +13,8 @@ const firebaseConfig = {
     measurementId: "G-D7CB8TZ9C9"
 };
 
+=======
+>>>>>>> origin/Nunn-dog's-Product_Manager
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
